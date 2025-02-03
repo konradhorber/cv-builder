@@ -1,0 +1,9 @@
+services:
+  cv-builder:
+    build: .
+    container_name: cv-builder-container
+    command: npm run dev
+    ports:
+      - 5173:5173
+    volumes:
+      - .:/code
