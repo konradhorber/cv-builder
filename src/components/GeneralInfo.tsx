@@ -15,12 +15,6 @@ function GeneralInfo() {
         });
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();        
-        console.log(formData);
-        setIsEditing(false);
-    };
-
     const toggleEditing = () => {
         setIsEditing(!isEditing);
     };
