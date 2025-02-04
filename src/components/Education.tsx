@@ -1,7 +1,10 @@
 import { useState } from "react";
 
-function Education() {
-    const [isEditing, setIsEditing] = useState(true);
+interface GeneralInfoProps {
+    isEditing: boolean;
+}
+
+function Education({ isEditing }: GeneralInfoProps) {
     const [experiences, setExperiences] = useState([
         { 
         schoolName: "",
@@ -30,10 +33,6 @@ function Education() {
             }
         ]);
     }
-
-    const toggleEditing = () => {
-        setIsEditing(!isEditing);
-    };
 
     return (
         <form>
@@ -80,9 +79,6 @@ function Education() {
                     </div>
                 ))
             )}
-            <button type="button" onClick={toggleEditing}>
-                Toggle editing
-            </button>
         </form>
     );
 }

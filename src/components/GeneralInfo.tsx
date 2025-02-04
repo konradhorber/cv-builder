@@ -1,7 +1,10 @@
 import { useState } from "react";
 
-function GeneralInfo() {
-    const [isEditing, setIsEditing] = useState(true);
+interface GeneralInfoProps {
+    isEditing: boolean;
+}
+
+function GeneralInfo({ isEditing }: GeneralInfoProps) {
     const [formData, setFormData] = useState({ 
         name: "",
         email: "",
@@ -13,10 +16,6 @@ function GeneralInfo() {
             ...formData,
             [e.target.name]: e.target.value
         });
-    };
-
-    const toggleEditing = () => {
-        setIsEditing(!isEditing);
     };
 
     return (
@@ -61,9 +60,7 @@ function GeneralInfo() {
                     <p>Phone: {formData.phone as string}</p>
                 </div>
             )}
-            <button type="button" onClick={toggleEditing}>
-                Toggle editing
-            </button>
+
         </form>
     );
 }
