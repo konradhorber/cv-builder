@@ -57,10 +57,10 @@ function GeneralInfo({ isEditing }: GeneralInfoProps) {
                     </div>
                 </div>
             ) : (
-                <div className="w-full flex flex-row justify-between items-center">
-                    <p>{formData.name as string}</p>
-                    <p>{formData.email as string}</p>
-                    <p>{formData.phone as string}</p>
+                <div className="w-full flex flex-row justify-center items-center">
+                    <p className="mx-1 md:mx-4">{formData.name as string}</p>
+                    <p className="mx-1 md:mx-4">{formData.email as string}</p>
+                    <p className="mx-1 md:mx-4">{formData.phone as string}</p>
                 </div>
             )}
 
