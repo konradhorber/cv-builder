@@ -20,18 +20,21 @@ function App() {
         </button>
       </header>
 
-      {/* general info */}
       <main className="w-full flex flex-col justify-start items-start p-4">
+        
+        {/* general info */}
         <div className="w-full flex flex-col items-start">
-          <h2 className="">General info</h2>
-          <hr className="w-full border-t border-gray-300 my-2" />
           <GeneralInfo isEditing={isEditing} />
         </div>
+
+        {/* education */}
         <div className="w-full flex flex-col justify-start items-start">
           <h2>Education</h2>
           <hr className="w-full border-t border-gray-300 my-2" />
           <Education isEditing={isEditing} />
         </div>
+
+        {/* experience */}
         <div className="w-full flex flex-col justify-start items-start">
           <h2>Experience</h2>
           <hr className="w-full border-t border-gray-300 my-2" />
