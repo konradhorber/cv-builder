@@ -34,6 +34,10 @@ function Education({ isEditing }: GeneralInfoProps) {
         ]);
     }
 
+    const removeExperience = (index: number) => {
+        setExperiences(experiences.filter((_, i) => i !== index));
+    }
+
     return (
         <form className="w-full">
             {isEditing ? (
@@ -73,6 +77,15 @@ function Education({ isEditing }: GeneralInfoProps) {
                                     className="w-full md:w-3/4 border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                             </div>
+                            {index > 0 && (
+                                <button 
+                                    type="button" 
+                                    onClick={() => removeExperience(index)}
+                                    className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                                >
+                                 Remove experience
+                             </button>
+                            )}                           
                         </div>
                     ))}
                     <button 
