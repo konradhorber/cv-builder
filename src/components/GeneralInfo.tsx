@@ -19,12 +19,13 @@ function GeneralInfo({ isEditing }: GeneralInfoProps) {
     };
 
     return (
-        <form>
+        <form className="w-full">
             {isEditing ? (
-                <>
-                    <div>
-                        <label htmlFor="name">Name:</label>
+                <div className="max-w-lg">
+                    <div className="mb-4 flex flex-col md:flex-row md:items-center">
+                        <label className="mb-2 md:mb-0 md:w-1/4" htmlFor="name">Name:</label>
                         <input 
+                            className="w-full md:w-3/4 border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             type="text" 
                             id="name" 
                             name="name"
@@ -32,9 +33,10 @@ function GeneralInfo({ isEditing }: GeneralInfoProps) {
                             onChange={ handleChange }    
                         />
                     </div>
-                    <div>
-                        <label htmlFor="email">Email:</label>
+                    <div className="mb-4 flex flex-col md:flex-row md:items-center">
+                        <label className="mb-2 md:mb-0 md:w-1/4" htmlFor="email">Email:</label>
                         <input 
+                            className="w-full md:w-3/4 border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             type="email" 
                             id="email" 
                             name="email"
@@ -42,9 +44,10 @@ function GeneralInfo({ isEditing }: GeneralInfoProps) {
                             onChange={ handleChange } 
                         />
                     </div>
-                    <div>
-                        <label htmlFor="phone">Phone:</label>
+                    <div className="mb-4 flex flex-col md:flex-row md:items-center">
+                        <label className="mb-2 md:mb-0 md:w-1/4" htmlFor="phone">Phone:</label>
                         <input 
+                            className="w-full md:w-3/4 border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             type="tel" 
                             id="phone" 
                             name="phone"
@@ -52,12 +55,12 @@ function GeneralInfo({ isEditing }: GeneralInfoProps) {
                             onChange={ handleChange } 
                         />
                     </div>
-                </>
+                </div>
             ) : (
-                <div>
-                    <p>Name: {formData.name as string}</p>
-                    <p>Email: {formData.email as string}</p>
-                    <p>Phone: {formData.phone as string}</p>
+                <div className="w-full flex flex-row justify-between items-center">
+                    <p>{formData.name as string}</p>
+                    <p>{formData.email as string}</p>
+                    <p>{formData.phone as string}</p>
                 </div>
             )}
 
