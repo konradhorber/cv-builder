@@ -35,41 +35,54 @@ function Education({ isEditing }: GeneralInfoProps) {
     }
 
     return (
-        <form>
+        <form className="w-full">
             {isEditing ? (
-                <>
+                <div className="max-w-lg">
                     {experiences.map((experience, index) => (
-                        <div key={index}>
-                            <label htmlFor="schoolName">School name:</label>
-                            <input 
-                                type="text" 
-                                id="schoolName" 
-                                name="schoolName"
-                                value={experience.schoolName}
-                                onChange={(e) => handleExperienceChange(index, e)}
-                            />
-                            <label htmlFor="titleOfStudy">Title of study:</label>
-                            <input 
-                                type="text"
-                                id="titleOfStudy" 
-                                name="titleOfStudy"
-                                value={experience.titleOfStudy}
-                                onChange={(e) => handleExperienceChange(index, e)}
-                            />
-                            <label htmlFor="graduationDate">Graduation date:</label>
-                            <input 
-                                type="date" 
-                                id="graduationDate" 
-                                name="graduationDate"
-                                value={experience.graduationDate}
-                                onChange={(e) => handleExperienceChange(index, e)}
-                            />
+                        <div key={index} className="mb-6">
+                            <div className="mb-4 flex flex-col md:flex-row md:items-center">
+                                <label htmlFor="schoolName" className="mb-2 md:mb-0 md:w-1/4">School name:</label>
+                                <input 
+                                    type="text" 
+                                    id="schoolName" 
+                                    name="schoolName"
+                                    value={experience.schoolName}
+                                    onChange={(e) => handleExperienceChange(index, e)}
+                                    className="w-full md:w-3/4 border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+                            <div className="mb-4 flex flex-col md:flex-row md:items-center">
+                                <label htmlFor="titleOfStudy" className="mb-2 md:mb-0 md:w-1/4">Title of study:</label>
+                                <input 
+                                    type="text"
+                                    id="titleOfStudy" 
+                                    name="titleOfStudy"
+                                    value={experience.titleOfStudy}
+                                    onChange={(e) => handleExperienceChange(index, e)}
+                                    className="w-full md:w-3/4 border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+                            <div className="mb-4 flex flex-col md:flex-row md:items-center">
+                                <label htmlFor="graduationDate" className="mb-2 md:mb-0 md:w-1/4">Graduation date:</label>
+                                <input 
+                                    type="date" 
+                                    id="graduationDate" 
+                                    name="graduationDate"
+                                    value={experience.graduationDate}
+                                    onChange={(e) => handleExperienceChange(index, e)}
+                                    className="w-full md:w-3/4 border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
                         </div>
                     ))}
-                    <button type="button" onClick={addExperience}>
+                    <button 
+                        type="button" 
+                        onClick={addExperience}
+                        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    >
                         Add experience
                     </button>
-                </>
+                </div>
             ) : (
                 experiences.map((experience, index) => (
                     <div key={index}>

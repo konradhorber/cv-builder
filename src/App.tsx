@@ -27,12 +27,12 @@ function App() {
           <hr className="w-full border-t border-gray-300 my-2" />
           <GeneralInfo isEditing={isEditing} />
         </div>
-        <div className="w-full flex flex-col justify-start items-start p-4">
+        <div className="w-full flex flex-col justify-start items-start">
           <h2>Education</h2>
           <hr className="w-full border-t border-gray-300 my-2" />
           <Education isEditing={isEditing} />
         </div>
-        <div className="w-full flex flex-col justify-start items-start p-4">
+        <div className="w-full flex flex-col justify-start items-start">
           <h2>Experience</h2>
           <hr className="w-full border-t border-gray-300 my-2" />
           <Experience isEditing={isEditing} />
