@@ -1,86 +1,67 @@
-import { useState } from "react";
+import { useItemList } from "../hooks/useItemList";
 
-interface GeneralInfoProps {
+interface EditingStatus {
     isEditing: boolean;
 }
 
-function Education({ isEditing }: GeneralInfoProps) {
-    const [experiences, setExperiences] = useState([
-        { 
+interface EducationExperience {
+    schoolName: string;
+    titleOfStudy: string;
+    graduationDate: string;
+}
+
+function Education({ isEditing }: EditingStatus) {
+    const defaultExperience: EducationExperience = {
         schoolName: "",
         titleOfStudy: "",
-        graduationDate: ""
-        }
-    ]);
-
-    const handleExperienceChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
-        const updatedExperiences = experiences.map((experience, i) => 
-            i === index 
-                ? {...experience, [e.target.name]: e.target.value }
-                : experience
-        );
-        
-        setExperiences(updatedExperiences);
+        graduationDate: "",
     };
 
-    const addExperience = () => {
-        setExperiences([
-            ...experiences,
-            { 
-                schoolName: "",
-                titleOfStudy: "",
-                graduationDate: ""
-            }
-        ]);
-    }
-
-    const removeExperience = (index: number) => {
-        setExperiences(experiences.filter((_, i) => i !== index));
-    }
+    const { items: educationExperiences, addItem, removeItem, updateItem } = useItemList<EducationExperience>([defaultExperience]);
 
     return (
         <form className="w-full">
             {isEditing ? (
                 <div className="max-w-lg">
-                    {experiences.map((experience, index) => (
+                    {educationExperiences.map((experience, index) => (
                         <div key={index} className="mb-6">
                             <div className="mb-4 flex flex-col md:flex-row md:items-center">
-                                <label htmlFor="schoolName" className="mb-2 md:mb-0 md:w-1/4">School name:</label>
+                                <label htmlFor={`schoolName-${index}`} className="mb-2 md:mb-0 md:w-1/4">School name:</label>
                                 <input 
                                     type="text" 
-                                    id="schoolName" 
+                                    id={`schoolName-${index}`} 
                                     name="schoolName"
                                     value={experience.schoolName}
-                                    onChange={(e) => handleExperienceChange(index, e)}
+                                    onChange={(e) => updateItem(index, e)}
                                     className="w-full md:w-3/4 border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                             </div>
                             <div className="mb-4 flex flex-col md:flex-row md:items-center">
-                                <label htmlFor="titleOfStudy" className="mb-2 md:mb-0 md:w-1/4">Title of study:</label>
+                                <label htmlFor={`titleOfStudy-${index}`} className="mb-2 md:mb-0 md:w-1/4">Title of study:</label>
                                 <input 
                                     type="text"
-                                    id="titleOfStudy" 
+                                    id={`titleOfStudy-${index}`} 
                                     name="titleOfStudy"
                                     value={experience.titleOfStudy}
-                                    onChange={(e) => handleExperienceChange(index, e)}
+                                    onChange={(e) => updateItem(index, e)}
                                     className="w-full md:w-3/4 border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                             </div>
                             <div className="mb-4 flex flex-col md:flex-row md:items-center">
-                                <label htmlFor="graduationDate" className="mb-2 md:mb-0 md:w-1/4">Graduation date:</label>
+                                <label htmlFor={`graduationDate-${index}`} className="mb-2 md:mb-0 md:w-1/4">Graduation date:</label>
                                 <input 
                                     type="date" 
-                                    id="graduationDate" 
+                                    id={`graduationDate-${index}`} 
                                     name="graduationDate"
                                     value={experience.graduationDate}
-                                    onChange={(e) => handleExperienceChange(index, e)}
+                                    onChange={(e) => updateItem(index, e)}
                                     className="w-full md:w-3/4 border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                             </div>
                             {index > 0 && (
                                 <button 
                                     type="button" 
-                                    onClick={() => removeExperience(index)}
+                                    onClick={() => removeItem(index)}
                                     className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
                                 >
                                  Remove experience
@@ -90,14 +71,14 @@ function Education({ isEditing }: GeneralInfoProps) {
                     ))}
                     <button 
                         type="button" 
-                        onClick={addExperience}
+                        onClick={() => addItem(defaultExperience)}
                         className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
                     >
                         Add experience
                     </button>
                 </div>
             ) : (
-                experiences.map((experience, index) => (
+                educationExperiences.map((experience, index) => (
                     <div key={index}>
                         <p>School name: {experience.schoolName as string}</p>
                         <p>Title of study: {experience.titleOfStudy as string}</p>

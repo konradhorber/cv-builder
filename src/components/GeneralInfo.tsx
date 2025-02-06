@@ -1,22 +1,23 @@
-import { useState } from "react";
+import { useItemList } from "../hooks/useItemList";
 
-interface GeneralInfoProps {
+interface EditingStatus {
     isEditing: boolean;
 }
 
-function GeneralInfo({ isEditing }: GeneralInfoProps) {
-    const [formData, setFormData] = useState({ 
+interface GeneralInfo {
+    name: string;
+    email: string;
+    phone: string;
+}
+
+function GeneralInfo({ isEditing }: EditingStatus) {
+    const defaultInfo: GeneralInfo = {
         name: "",
         email: "",
-        phone: ""
-     });
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
+        phone: "",
     };
+
+    const { items: generalInfoData, updateItem } = useItemList<GeneralInfo>([defaultInfo]);
 
     return (
         <form className="w-full">
@@ -29,8 +30,8 @@ function GeneralInfo({ isEditing }: GeneralInfoProps) {
                             type="text" 
                             id="name" 
                             name="name"
-                            value={ formData.name }
-                            onChange={ handleChange }    
+                            value={ generalInfoData[0].name }
+                            onChange={ (e) => updateItem(0,e) }    
                         />
                     </div>
                     <div className="mb-4 flex flex-col md:flex-row md:items-center">
@@ -40,8 +41,8 @@ function GeneralInfo({ isEditing }: GeneralInfoProps) {
                             type="email" 
                             id="email" 
                             name="email"
-                            value={ formData.email }
-                            onChange={ handleChange } 
+                            value={ generalInfoData[0].email }
+                            onChange={ (e) => updateItem(0,e) } 
                         />
                     </div>
                     <div className="mb-4 flex flex-col md:flex-row md:items-center">
@@ -51,16 +52,16 @@ function GeneralInfo({ isEditing }: GeneralInfoProps) {
                             type="tel" 
                             id="phone" 
                             name="phone"
-                            value={ formData.phone }
-                            onChange={ handleChange } 
+                            value={ generalInfoData[0].phone }
+                            onChange={ (e) => updateItem(0,e) } 
                         />
                     </div>
                 </div>
             ) : (
                 <div className="w-full flex flex-row justify-center items-center">
-                    <p className="mx-1 md:mx-4">{formData.name as string}</p>
-                    <p className="mx-1 md:mx-4">{formData.email as string}</p>
-                    <p className="mx-1 md:mx-4">{formData.phone as string}</p>
+                    <p className="mx-1 md:mx-4">{generalInfoData[0].name as string}</p>
+                    <p className="mx-1 md:mx-4">{generalInfoData[0].email as string}</p>
+                    <p className="mx-1 md:mx-4">{generalInfoData[0].phone as string}</p>
                 </div>
             )}
 

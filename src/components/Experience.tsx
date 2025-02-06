@@ -1,47 +1,28 @@
-import { useState } from "react";
+import { useItemList } from "../hooks/useItemList"; 
 
-interface GeneralInfoProps {
+interface EditingStatus {
     isEditing: boolean;
 }
 
-function Experience({ isEditing }: GeneralInfoProps) {
-  // An array to hold multiple work experience objects.
-  const [experiences, setExperiences] = useState([
-    {
-      companyName: "",
-      positionTitle: "",
-      jobResponsibilities: "",
-      dateFrom: "",
-      dateTo: ""
-    }
-  ]);
+interface Experience {
+    companyName: string;
+    positionTitle: string;
+    jobResponsibilities: string;
+    dateFrom: string;
+    dateTo: string;
+}
 
-  // Generic change handler that works for both input and textarea elements.
-  const handleExperienceChange = (
-    index: number,
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const updatedExperiences = experiences.map((experience, i) =>
-      i === index
-        ? { ...experience, [e.target.name]: e.target.value }
-        : experience
-    );
-    setExperiences(updatedExperiences);
-  };
+function Experience({ isEditing }: EditingStatus) {
+  const defaultExperience: Experience = {  
+    companyName: "",
+    positionTitle: "",
+    jobResponsibilities: "",
+    dateFrom: "",
+    dateTo: ""
+  }
 
-  // Adds a new blank experience entry.
-  const addExperience = () => {
-    setExperiences([
-      ...experiences,
-      {
-        companyName: "",
-        positionTitle: "",
-        jobResponsibilities: "",
-        dateFrom: "",
-        dateTo: ""
-      }
-    ]);
-  };
+  const { items: experiences, addItem, removeItem, updateItem } = useItemList<Experience>([defaultExperience]);
+
 
   return (
     <form>
@@ -55,7 +36,7 @@ function Experience({ isEditing }: GeneralInfoProps) {
                 id={`companyName-${index}`}
                 name="companyName"
                 value={experience.companyName}
-                onChange={(e) => handleExperienceChange(index, e)}
+                onChange={(e) => updateItem(index, e)}
               />
 
               <label htmlFor={`positionTitle-${index}`}>Position title:</label>
@@ -64,7 +45,7 @@ function Experience({ isEditing }: GeneralInfoProps) {
                 id={`positionTitle-${index}`}
                 name="positionTitle"
                 value={experience.positionTitle}
-                onChange={(e) => handleExperienceChange(index, e)}
+                onChange={(e) => updateItem(index, e)}
               />
 
               <label htmlFor={`jobResponsibilities-${index}`}>Job responsibilities:</label>
@@ -72,7 +53,7 @@ function Experience({ isEditing }: GeneralInfoProps) {
                 id={`jobResponsibilities-${index}`}
                 name="jobResponsibilities"
                 value={experience.jobResponsibilities}
-                onChange={(e) => handleExperienceChange(index, e)}
+                onChange={(e) => updateItem(index, e)}
               ></textarea>
 
               <label htmlFor={`dateFrom-${index}`}>Date from:</label>
@@ -81,7 +62,7 @@ function Experience({ isEditing }: GeneralInfoProps) {
                 id={`dateFrom-${index}`}
                 name="dateFrom"
                 value={experience.dateFrom}
-                onChange={(e) => handleExperienceChange(index, e)}
+                onChange={(e) => updateItem(index, e)}
               />
 
               <label htmlFor={`dateTo-${index}`}>Date to:</label>
@@ -90,11 +71,21 @@ function Experience({ isEditing }: GeneralInfoProps) {
                 id={`dateTo-${index}`}
                 name="dateTo"
                 value={experience.dateTo}
-                onChange={(e) => handleExperienceChange(index, e)}
+                onChange={(e) => updateItem(index, e)}
               />
+
+              {index > 0 && (
+                  <button 
+                      type="button" 
+                      onClick={() => removeItem(index)}
+                      className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  >
+                    Remove experience
+                </button>
+              )}                
             </div>
           ))}
-          <button type="button" onClick={addExperience}>
+          <button type="button" onClick={() => addItem(defaultExperience)}>
             Add Experience
           </button>
         </>
