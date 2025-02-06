@@ -13,11 +13,15 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* header */}
-      <header className="flex flex-row justify-between items-center w-full p-4 sticky top-0 bg-gray-800 text-white shadow-lg z-10">
-        <h1 className="text-2xl font-bold text-left">THE CV</h1>
-        <button type="button" onClick={toggleEditing} className="px-4 py-2">
-          Toggle editing
-        </button>
+      <header className="w-full p-4 sticky top-0 bg-[var(--bg-color)]">
+        <div className="flex flex-row justify-between items-center w-full">
+          <div className="w-[144.83px]"></div>
+          <h1 className="text-l font-bold text-center">CV</h1>
+          <button type="button" onClick={toggleEditing} className="px-4 py-2">
+            Toggle editing
+          </button>
+        </div>
+        <hr className="w-full border-t border-gray-300 my-2" />        
       </header>
 
       <main className="w-full flex flex-col justify-start items-start p-4">
