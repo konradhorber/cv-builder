@@ -79,10 +79,10 @@ function Education({ isEditing }: EditingStatus) {
                 </div>
             ) : (
                 educationExperiences.map((experience, index) => (
-                    <div key={index}>
-                        <p>School name: {experience.schoolName as string}</p>
-                        <p>Title of study: {experience.titleOfStudy as string}</p>
-                        <p>Graduation date: {experience.graduationDate as string}</p>
+                    <div key={index} className="flex flex-col">
+                        <p className="font-bold">{experience.schoolName as string}</p>
+                        <li>{experience.titleOfStudy as string}</li>
+                        <li>Graduation date: {experience.graduationDate as string}</li>
                     </div>
                 ))
             )}
