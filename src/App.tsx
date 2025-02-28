@@ -1,9 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GeneralInfo from "./components/GeneralInfo";
 import Education from "./components/Education";
 import Experience from "./components/Experience";
+import { LiveUpdate } from "@capawesome/capacitor-live-update";
 
 function App() {
+  useEffect(() => {
+    const sync = async () => {
+      const result = await LiveUpdate.sync();
+      if (result.nextBundleId) {
+        await LiveUpdate.reload();
+      }
+    };
+
+    sync();
+  }, []);
   const [isEditing, setIsEditing] = useState(true);
 
   const toggleEditing = () => {
@@ -33,7 +44,7 @@ function App() {
 
         {/* education */}
         <div className="w-full flex flex-col justify-start items-start">
-          <h2>Education</h2>
+          <h2>Hello Potato</h2>
           <hr className="w-full border-t border-gray-300 my-2" />
           <Education isEditing={isEditing} />
         </div>
